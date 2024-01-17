@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.edu.tasksapi.entity.User;
 import com.edu.tasksapi.repository.UserRepository;
+import com.edu.tasksapi.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +21,20 @@ public class MainController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService svc;
+
     @GetMapping("/{id}")
     public User getUser(@PathVariable long id) {
 
         return userRepository.findByIduser(id);
+
+    }
+
+    @GetMapping("/random")
+    public User getUser() {
+
+        return svc.getRandomUser();
 
     }
 }

@@ -34,7 +34,7 @@ public class UsersController {
     @GetMapping("/{id}")
     public User getUser(@PathVariable long id) {
 
-        return userRepository.findByIduser(id);
+        return userRepository.findByIduser(id).orElseThrow();
 
     }
 

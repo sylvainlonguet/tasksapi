@@ -25,12 +25,9 @@ public class UserService {
     @LogExecutionTime
     public User getRandomUser() {
         int random = new Random().nextInt(limit) + 1;
-        User user = repo.findByIduser(random);
+        User user = repo.findByIduser(random).orElseThrow(() -> new RuntimeException("ID " + random + " inexistant!"));
 
-        if (user == null)
-            throw new RuntimeException("ID " + random + " inexistant!");
-        else
-            return user;
+        return user;
     }
 
     @PostConstruct

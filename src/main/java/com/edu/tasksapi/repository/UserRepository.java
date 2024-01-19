@@ -1,16 +1,16 @@
 package com.edu.tasksapi.repository;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 import com.edu.tasksapi.entity.User;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-    Optional<User> findByIduser(long iduser);
+public interface UserRepository extends ReactiveCrudRepository<User, Long> {
 
-    List<User> findAll();
+    Mono<User> findByIduser(long iduser);
+
+    Flux<User> findAll();
 
 }

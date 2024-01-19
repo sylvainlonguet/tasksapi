@@ -34,7 +34,7 @@ public class UsersController {
     @GetMapping("/{id}")
     public User getUser(@PathVariable long id) {
 
-        return userRepository.findByIduser(id).orElseThrow();
+        return userRepository.findByIduser(id).block();
 
     }
 
@@ -69,7 +69,7 @@ public class UsersController {
         if (user == null) {
             throw new Exception("user non renseigné");
         }
-        return userRepository.save(user);
+        return userRepository.save(user).blockOptional().orElseThrow();
     }
 
 }

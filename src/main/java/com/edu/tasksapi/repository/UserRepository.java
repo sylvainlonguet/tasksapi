@@ -1,16 +1,18 @@
 package com.edu.tasksapi.repository;
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.repository.CrudRepository;
 
 import com.edu.tasksapi.entity.User;
 
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+public interface UserRepository extends CrudRepository<User, Long> {
 
-public interface UserRepository extends ReactiveCrudRepository<User, Long> {
+    Optional<User> findByIduser(long iduser);
 
-    Mono<User> findByIduser(long iduser);
+    List<User> findAll();
 
-    Flux<User> findAll();
+    Optional<User> findByEmail(String email);
 
 }

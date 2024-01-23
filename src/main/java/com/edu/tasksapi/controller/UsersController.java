@@ -1,24 +1,22 @@
 package com.edu.tasksapi.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import com.edu.tasksapi.entity.User;
-import com.edu.tasksapi.repository.UserRepository;
-import com.edu.tasksapi.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.edu.tasksapi.entity.User;
+import com.edu.tasksapi.repository.UserRepository;
+import com.edu.tasksapi.service.UserService;
 
 @RestController
 @RequestMapping("users")
@@ -34,7 +32,7 @@ public class UsersController {
     @GetMapping("/{id}")
     public User getUser(@PathVariable long id) {
 
-        return userRepository.findByIduser(id).block();
+        return userRepository.findByIduser(id).orElseThrow();
 
     }
 
@@ -69,7 +67,7 @@ public class UsersController {
         if (user == null) {
             throw new Exception("user non renseigné");
         }
-        return userRepository.save(user).blockOptional().orElseThrow();
+        return userRepository.save(user);
     }
 
 }
